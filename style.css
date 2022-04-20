@@ -3,49 +3,69 @@
    box-sizing: border-box;
    text-decoration: none;
    list-style-type:  none;
-
 }
-
 body{ display: flex;
     flex-direction: column;
     align-items: stretch;
     min-height: 100vh;
-    
-}
-
+    }
 header, footer, nav{
     flex: 1 1 auto;
 }
 section{
-    flex: 10 1 auto;
+    flex: 5 1 auto;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content:space-around;
     align-items: stretch;
-}
+    background-color: rgb(230, 214, 178);
+    padding: 2em;
+    }
 ul, .partida, div>h1 {
-
     display: flex;
     justify-content: center;
     gap: 1em;
-    
-}
-
+    }
 header, footer, nav{
-    background-color: rgb(232, 229, 229);
+    background-color: rgb(170, 198, 185);
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
-.partida {
+.eleccion {
+    flex: 1 1 auto;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    justify-content: space-around;
 }
-
-.jugada{min-width: 200px;
-    min-height: 200px;
+.partida {
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    padding: 10em;
+    gap: 5em;
+}
+.ganador {
+    flex: 1 1 auto;
+    }
+.vs {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ font-size: 50px;
+}
+.jugada{
+    flex: 1 1 auto;
+    min-width: 10em;
+    min-height: 10em;
+    max-width: 30em;
+    max-height: 30em;
     border: solid 10px;
     border-radius: 20px;
+}
 
+button {
+    padding: 0.5em 2em 0.5em 2em;
+    border-radius: 0.5em;
 }
