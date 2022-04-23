@@ -1,10 +1,7 @@
 function jugada_humano() {
     let jugada= prompt('Ingrese la opcion elegida:').toLowerCase()
     return jugada
-
-    
 }
-
 
 function jugada_pc(){
     let opciones= [
@@ -15,27 +12,21 @@ function jugada_pc(){
     return opcion
 }
 
-
 function aJugar(){
-const jugadaHumano = jugada_humano()
-const jugadaPc= jugada_pc()
-if (jugadaHumano==jugadaPc){
+    const jugadaHumano = jugada_humano()
+    const jugadaPc= jugada_pc()
+    if (jugadaHumano==jugadaPc){
     return "empate"
+    }
+    else if (
+        jugadaHumano=="piedra" && jugadaPc=='tijera'  
+        || jugadaHumano=='papel' && jugadaPc== 'piedra' 
+        || jugadaHumano=='tijera' && jugadaPc=='papel' ){ 
+        return 'humano'}
+    else{ 
+        return 'pc'
+    }
 }
-
-else if (
-   jugadaHumano=="piedra" && jugadaPc=='tijera'  
-|| jugadaHumano=='papel' && jugadaPc== 'piedra' 
-|| jugadaHumano=='tijera' && jugadaPc=='papel' ){ 
-return 'humano'}
-
-else{ 
-    return 'pc'
-}
-};
-
-
-
 
 function game(){
     let pc=0
