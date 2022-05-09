@@ -1,45 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Piedra Papel Tijera</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <header>
-        <h1>PIEDRA PAPEL TIJERA</h1>
-
+      <h1>PIEDRA PAPEL TIJERA</h1>
     </header>
-    
-   
-    <SECTIon>
-        <div class="eleccion">
-            <h1>REALIZA TU JUGADA: </h1>
-            <ul>
-                <li><button class="piedra">Piedra</button></li>
-                <li><button class="papel">Papel</button></li>
-                <li><button class="tijera">Tijera</button></li>
-            </ul>
 
+    <section>
+      <div class="eleccion">
+        <h1>REALIZA TU JUGADA:</h1>
+        <ul>
+          <li><button class="piedra">Piedra</button></li>
+          <li><button class="papel">Papel</button></li>
+          <li><button class="tijera">Tijera</button></li>
+        </ul>
+      </div>
+
+      <div class="partida">
+        <div class="bordeDerecho">
+          <div class="jugada humano">
+            <img src="piedraizquierda.png" alt="" />
+          </div>
+          <div>Puntuacion : 0</div>
         </div>
-
-        <div class="partida">
-            <div class="jugada humano"><img src="piedraizquierda.png" alt=""></div>
-            <div class="vs">VS</div>
-            <div class="jugada pc"> <img src="piedraderecha.png" alt=""> </div>
-
+        <div class="medio">
+          <div class="vs">VS</div>
+          <div></div>
         </div>
+        <div class="bordeIzquierdo">
+          <div class="jugada pc"><img src="piedraderecha.png" alt="" /></div>
+          <div>Puntuacion : 0</div>
+        </div>
+      </div>
+    </section>
 
-        <div class="ganador"></div>
-
-    </SECTIon>
-    
     <footer>
-     <p>By Matias Poses</p>
+      <p>By Matias Poses</p>
     </footer>
-
-</body>
-<script src="script.js"></script>
+  </body>
+  <script src="script.js"></script>
 </html>

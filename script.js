@@ -1,5 +1,18 @@
+const papelDer = "papelderecha.png";
+const piedraDer = "piedraderecha.png";
+const tijeraDer = "tijeraderecha.png";
+const papelIzq = "papelizquierda.png";
+const piedraIzq = "piedraizquierda.png";
+const tijeraIzq = "tijeraizquierda.png";
+
 const botones = document.querySelectorAll(".eleccion>ul>li>button");
 
+const puntuacionHumano = document.querySelector(
+  "body > section > div.partida > div.bordeDerecho > div:nth-child(2)"
+);
+const puntuacionPc = document.querySelector(
+  "body > section > div.partida > div.bordeIzquierdo > div:nth-child(2)"
+);
 // funcion para generar la opcion elegida por la pc
 function jugadaPc() {
   const opciones = ["piedra", "papel", "tijera"];
@@ -9,8 +22,33 @@ function jugadaPc() {
 
 // funcion que genera una partida unica y retorna el ganador
 function aJugar(e) {
+  const cuadroHumano = document.querySelector(
+    "body > section > div.partida > div.bordeDerecho > div.jugada.humano >img"
+  );
   const humano = e.target.textContent.toLowerCase();
+  if (humano === "piedra") {
+    cuadroHumano.setAttribute("src", piedraIzq);
+  } else if (humano === "papel") {
+    cuadroHumano.setAttribute("src", papelIzq);
+  } else if (humano === "tijera") {
+    cuadroHumano.setAttribute("src", tijeraIzq);
+  } else if (humano === undefined) {
+    cuadroHumano.setAttribute("src", piedraIzq);
+  }
+  const cuadroPc = document.querySelector(
+    "body > section > div.partida > div.bordeIzquierdo > div.jugada.pc > img"
+  );
   const pc = jugadaPc();
+  if (pc === "piedra") {
+    cuadroPc.setAttribute("src", piedraDer);
+  } else if (pc === "papel") {
+    cuadroPc.setAttribute("src", papelDer);
+  } else if (pc === "tijera") {
+    cuadroPc.setAttribute("src", tijeraDer);
+  } else if (pc === undefined) {
+    cuadroPc.setAttribute("src", piedraDer);
+  }
+
   let partido = "";
   if (humano === pc) {
     partido = "empate";
@@ -23,8 +61,23 @@ function aJugar(e) {
   } else {
     partido = "pc";
   }
-  console.log(partido);
 }
+
+function sumarPuntuacion(participante) {
+  const puntosActualH = puntuacionHumano.textContent;
+  const puntosActualP = puntuacionPc.textContent;
+  if (participante === "humano") {
+    puntuacionHumano.textContent = `Puntuacion: ${
+      puntosActualH[puntosActualH.length - 1] + 1
+    } `;
+  } else if (participante === "pc") {
+    puntuacionPc.textContent = `Puntuacion: ${
+      puntosActualH[puntosActualP.length - 1] + 1
+    } `;
+  }
+}
+
+function ganoAlguien() {}
 
 function agragarListener() {
   this.addEventListener("click", aJugar);
