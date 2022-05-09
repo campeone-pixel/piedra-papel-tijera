@@ -1,32 +1,39 @@
-// funcion para guardar la opcion elegida por el usuario
-function jugada_humano() {
-  const jugada = prompt("Ingrese la opcion elegida:").toLowerCase();
-  return jugada;
-}
+const botones = document.querySelectorAll(".eleccion>ul>li>button");
+
 // funcion para generar la opcion elegida por la pc
-function jugada_pc() {
+function jugadaPc() {
   const opciones = ["piedra", "papel", "tijera"];
   const opcion = opciones[Math.floor(Math.random() * opciones.length)];
   return opcion;
 }
+
 // funcion que genera una partida unica y retorna el ganador
-function aJugar() {
-  const humano = jugada_humano();
-  const pc = jugada_pc();
+function aJugar(e) {
+  const humano = e.target.textContent.toLowerCase();
+  const pc = jugadaPc();
+  let partido = "";
   if (humano === pc) {
-    return "empate";
-  }
-  if (
+    partido = "empate";
+  } else if (
     (humano === "piedra" && pc === "tijera") ||
     (humano === "papel" && pc === "piedra") ||
     (humano === "tijera" && pc === "papel")
   ) {
-    return "humano";
+    partido = "humano";
+  } else {
+    partido = "pc";
   }
-  return "pc";
+  console.log(partido);
 }
+
+function agragarListener() {
+  this.addEventListener("click", aJugar);
+}
+
+botones.forEach(agragarListener);
+
 // funcion que dice quien llego primero a 5 victorias
-function game() {
+/* function game() {
   let pc = 0;
   let humano = 0;
   const x = 0;
@@ -37,7 +44,7 @@ function game() {
     } else if (resultado === "pc") {
       console.log("gano pc");
       pc += 1;
-      /*  si pc llego al limite de 5 victorias  rompe el loop */
+
       if (pc === 5) {
         console.log(`gano pc, el resultado es ${pc} contra ${humano}`);
         break;
@@ -45,25 +52,14 @@ function game() {
     } else if (resultado === "humano") {
       console.log("gano humano");
       humano += 1;
-      /* si el humano llego al limite de 5 victorias rompe el loop */
+
       if (humano === 5) {
         console.log(`gano humano, el resultado es ${humano} contra ${pc}`);
         break;
       }
     }
   }
-}
-game();
-
-const botones = document.querySelectorAll(".eleccion>ul>li>button");
-
-let eleccion = "";
-for (const boton of botones) {
-  boton.addEventListener("click", () => {
-    eleccion = boton.textContent.toLowerCase();
-    console.log(eleccion);
-  });
-}
+} */
 
 /* const cars = ["Saab", "Volvo", "BMW"];
 cars[0] = "Opel";
