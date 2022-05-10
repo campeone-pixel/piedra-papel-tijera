@@ -13,11 +13,61 @@ const puntuacionHumano = document.querySelector(
 const puntuacionPc = document.querySelector(
   "body > section > div.partida > div.bordeIzquierdo > div:nth-child(2)"
 );
+
+const containerInstrucciones = document.querySelector(
+  "body > section > div.eleccion > div"
+);
+
+const instrucciones = document.querySelector(
+  "body > section > div.eleccion > h1"
+);
+
+const instrucciones2 = document.createElement("button");
+
+let puntosActualH =
+  +puntuacionHumano.textContent[puntuacionHumano.textContent.length - 1];
+let puntosActualP =
+  +puntuacionPc.textContent[puntuacionPc.textContent.length - 1];
+
 // funcion para generar la opcion elegida por la pc
 function jugadaPc() {
   const opciones = ["piedra", "papel", "tijera"];
   const opcion = opciones[Math.floor(Math.random() * opciones.length)];
   return opcion;
+}
+
+function sumarPuntuacion(participante) {
+  if (participante === "humano") {
+    puntosActualH += 1;
+    puntuacionHumano.textContent = `Puntuacion:${puntosActualH} `;
+  } else if (participante === "pc") {
+    puntosActualP += 1;
+    puntuacionPc.textContent = `Puntuacion:${puntosActualP} `;
+  }
+}
+
+function ganoAlguien() {
+  if (puntosActualH > 4) {
+    console.log("gano humano");
+    instrucciones.innerHTML = "GANASTE";
+    instrucciones2.textContent = "EMPEZAR DE NUEVO";
+    containerInstrucciones.setAttribute("class", "nuevo");
+    containerInstrucciones.appendChild(instrucciones2);
+    puntosActualH = 0;
+    puntosActualP = 0;
+    puntuacionHumano.textContent = `Puntuacion:${puntosActualH} `;
+    puntuacionPc.textContent = `Puntuacion:${puntosActualP} `;
+  } else if (puntosActualP > 4) {
+    console.log("gano pc");
+    instrucciones.innerHTML = "PERDISTE";
+    instrucciones2.textContent = "EMPEZAR DE NUEVO";
+    instrucciones2.setAttribute("class", "nuevo");
+    containerInstrucciones.setAttribute("class", "nuevo");
+    puntosActualH = 0;
+    puntosActualP = 0;
+    puntuacionHumano.textContent = `Puntuacion:${puntosActualH} `;
+    puntuacionPc.textContent = `Puntuacion:${puntosActualP} `;
+  }
 }
 
 // funcion que genera una partida unica y retorna el ganador
@@ -61,23 +111,9 @@ function aJugar(e) {
   } else {
     partido = "pc";
   }
+  sumarPuntuacion(partido);
+  ganoAlguien();
 }
-
-function sumarPuntuacion(participante) {
-  const puntosActualH = puntuacionHumano.textContent;
-  const puntosActualP = puntuacionPc.textContent;
-  if (participante === "humano") {
-    puntuacionHumano.textContent = `Puntuacion: ${
-      puntosActualH[puntosActualH.length - 1] + 1
-    } `;
-  } else if (participante === "pc") {
-    puntuacionPc.textContent = `Puntuacion: ${
-      puntosActualH[puntosActualP.length - 1] + 1
-    } `;
-  }
-}
-
-function ganoAlguien() {}
 
 function agragarListener() {
   this.addEventListener("click", aJugar);
@@ -134,7 +170,7 @@ value + '</li>'}
 console.log(text)
 
 cars.push('fiat')
-console.log(cars)          
+console.log(cars)
 
 console.log(Array.isArray(cars))
 console.log(cars instanceof Array)
