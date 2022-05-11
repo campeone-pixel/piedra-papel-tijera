@@ -24,6 +24,10 @@ const instrucciones = document.querySelector(
 
 const instrucciones2 = document.createElement("button");
 
+botones[0].addEventListener("click", aJugar);
+botones[1].addEventListener("click", aJugar);
+botones[2].addEventListener("click", aJugar);
+
 let puntosActualH =
   +puntuacionHumano.textContent[puntuacionHumano.textContent.length - 1];
 let puntosActualP =
@@ -57,16 +61,23 @@ function ganoAlguien() {
     puntosActualP = 0;
     puntuacionHumano.textContent = `Puntuacion:${puntosActualH} `;
     puntuacionPc.textContent = `Puntuacion:${puntosActualP} `;
+    botones[0].removeEventListener("click", aJugar);
+    botones[1].removeEventListener("click", aJugar);
+    botones[2].removeEventListener("click", aJugar);
   } else if (puntosActualP > 4) {
     console.log("gano pc");
     instrucciones.innerHTML = "PERDISTE";
     instrucciones2.textContent = "EMPEZAR DE NUEVO";
     instrucciones2.setAttribute("class", "nuevo");
     containerInstrucciones.setAttribute("class", "nuevo");
+    containerInstrucciones.appendChild(instrucciones2);
     puntosActualH = 0;
     puntosActualP = 0;
     puntuacionHumano.textContent = `Puntuacion:${puntosActualH} `;
     puntuacionPc.textContent = `Puntuacion:${puntosActualP} `;
+    botones[0].removeEventListener("click", aJugar);
+    botones[1].removeEventListener("click", aJugar);
+    botones[2].removeEventListener("click", aJugar);
   }
 }
 
@@ -114,12 +125,6 @@ function aJugar(e) {
   sumarPuntuacion(partido);
   ganoAlguien();
 }
-
-function agragarListener() {
-  this.addEventListener("click", aJugar);
-}
-
-botones.forEach(agragarListener);
 
 // funcion que dice quien llego primero a 5 victorias
 /* function game() {
