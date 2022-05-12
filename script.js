@@ -18,6 +18,14 @@ const containerInstrucciones = document.querySelector(
   "body > section > div.eleccion > div"
 );
 
+const jHumano = document.querySelector(
+  "body > section > div.partida > div.bordeDerecho > div.jugada.humano"
+);
+
+const jPc = document.querySelector(
+  "body > section > div.partida > div.bordeIzquierdo > div.jugada.pc"
+);
+
 const instrucciones = document.querySelector(
   "body > section > div.eleccion > h1"
 );
@@ -50,34 +58,43 @@ function sumarPuntuacion(participante) {
   }
 }
 
-function ganoAlguien() {
-  if (puntosActualH > 4) {
-    console.log("gano humano");
-    instrucciones.innerHTML = "GANASTE";
-    instrucciones2.textContent = "EMPEZAR DE NUEVO";
-    containerInstrucciones.setAttribute("class", "nuevo");
-    containerInstrucciones.appendChild(instrucciones2);
+function resetearJuego() {
+  const botonReinicio = document.querySelector(
+    "body > section > div.eleccion > div > button"
+  );
+  botonReinicio.addEventListener("click", () => {
     puntosActualH = 0;
     puntosActualP = 0;
     puntuacionHumano.textContent = `Puntuacion:${puntosActualH} `;
     puntuacionPc.textContent = `Puntuacion:${puntosActualP} `;
+    instrucciones.innerHTML = "REALIZA TU JUGADA:";
+    botonReinicio.remove();
+    botones[0].addEventListener("click", aJugar);
+    botones[1].addEventListener("click", aJugar);
+    botones[2].addEventListener("click", aJugar);
+  });
+}
+
+function ganoAlguien() {
+  if (puntosActualH > 4) {
+    instrucciones.innerHTML = "GANASTE";
+    instrucciones2.textContent = "EMPEZAR DE NUEVO";
+    containerInstrucciones.setAttribute("class", "nuevo");
+    containerInstrucciones.appendChild(instrucciones2);
     botones[0].removeEventListener("click", aJugar);
     botones[1].removeEventListener("click", aJugar);
     botones[2].removeEventListener("click", aJugar);
+    resetearJuego();
   } else if (puntosActualP > 4) {
-    console.log("gano pc");
     instrucciones.innerHTML = "PERDISTE";
     instrucciones2.textContent = "EMPEZAR DE NUEVO";
     instrucciones2.setAttribute("class", "nuevo");
     containerInstrucciones.setAttribute("class", "nuevo");
     containerInstrucciones.appendChild(instrucciones2);
-    puntosActualH = 0;
-    puntosActualP = 0;
-    puntuacionHumano.textContent = `Puntuacion:${puntosActualH} `;
-    puntuacionPc.textContent = `Puntuacion:${puntosActualP} `;
     botones[0].removeEventListener("click", aJugar);
     botones[1].removeEventListener("click", aJugar);
     botones[2].removeEventListener("click", aJugar);
+    resetearJuego();
   }
 }
 
@@ -119,8 +136,12 @@ function aJugar(e) {
     (humano === "tijera" && pc === "papel")
   ) {
     partido = "humano";
+    jHumano.style = "background-color: green";
+    jPc.style = "background-color: red";
   } else {
     partido = "pc";
+    jHumano.style = "background-color: red";
+    jPc.style = "background-color: green";
   }
   sumarPuntuacion(partido);
   ganoAlguien();

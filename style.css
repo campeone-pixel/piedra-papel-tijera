@@ -134,3 +134,12 @@ div.medio > div:nth-child(2) {
   justify-content: center;
   align-items: center;
 }
+
+.nuevo > button {
+  flex: 0 1 12em;
+}
+
+body > section > div.partida > div.bordeDerecho > div:nth-child(2),
+body > section > div.partida > div.bordeIzquierdo > div:nth-child(2) {
+  color: white;
+}
